@@ -2,6 +2,24 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Version>0.1.0</Version>
+    <Authors>Tim Hanewich</Authors>
+    <Company>Tim Hanewich</Company>
+    <Description>Helper library for transaction with SQL (assembling commands)</Description>
+    <Copyright>Tim Hanewich</Copyright>
+    <PackageLicenseFile>license.md</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/TimHanewich/TimHanewich.SqlHelper</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>SQL,Hanewich</PackageTags>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+    <FileVersion>0.0.0.0</FileVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\license.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
