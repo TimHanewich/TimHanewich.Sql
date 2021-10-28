@@ -8,7 +8,7 @@ namespace TimHanewich.SqlHelper
         {
             string ToReturn = "";
             ToReturn = dt.Year.ToString("0000") + dt.Month.ToString("00") + dt.Day.ToString("00");
-            ToReturn = ToReturn + " " + dt.Hour.ToString() + ":" + dt.Minute.ToString();
+            ToReturn = ToReturn + " " + dt.Hour.ToString() + ":" + dt.Minute.ToString() + ":" + dt.Second.ToString() + "." + dt.Millisecond.ToString();
             return ToReturn;
         }
 
