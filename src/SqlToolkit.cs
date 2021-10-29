@@ -39,10 +39,14 @@ namespace TimHanewich.SqlHelper
             while (dr.Read())
             {
                 JObject ThisObj = new JObject();
-                foreach (string column in ColumnNames)
+                
+                for (int i = 0; i < dr.FieldCount; i++)
                 {
+                    //Get the column name
+                    string column = ColumnNames[i];
+
                     //Get the value.
-                    string colVal = dr.GetValue(column).ToString();
+                    string colVal = dr.GetValue(i).ToString();
                     bool Added = false;
 
                     //Is it an integer?
