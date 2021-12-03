@@ -45,42 +45,50 @@ namespace TimHanewich.Sql
                     //Get the column name
                     string column = ColumnNames[i];
 
-                    //Get the value.
-                    string colVal = dr.GetValue(i).ToString();
-                    bool Added = false;
-
-                    //Is it an integer?
-                    int colValNumInt = 0;
-                    try
+                    //First, check if this column is null. If it is null, add null.
+                    bool IsNull = dr.IsDBNull(i);
+                    if (IsNull)
                     {
-                        colValNumInt = Convert.ToInt32(colVal);
-                        ThisObj.Add(column, colValNumInt);
-                        Added = true;
+                        ThisObj.Add(column, null);
                     }
-                    catch
+                    else //It is not null, so add the value somehow.
                     {
+                        //Get the value.
+                        string colVal = dr.GetValue(i).ToString();
+                        bool Added = false;
 
-                    }
+                        //Is it an integer?
+                        int colValNumInt = 0;
+                        try
+                        {
+                            colValNumInt = Convert.ToInt32(colVal);
+                            ThisObj.Add(column, colValNumInt);
+                            Added = true;
+                        }
+                        catch
+                        {
 
-                    //Is it numeric? If so, add the number version
-                    float colValNumFlo = 0;
-                    try
-                    {
-                        colValNumFlo = Convert.ToSingle(colVal);
-                        ThisObj.Add(column, colValNumFlo);
-                        Added = true;
-                    }
-                    catch
-                    {
-                        
-                    }
+                        }
 
-                    //If it has still not been added, add it as a string
-                    if (Added == false)
-                    {
-                        ThisObj.Add(column, colVal);
-                    }
+                        //Is it numeric? If so, add the number version
+                        float colValNumFlo = 0;
+                        try
+                        {
+                            colValNumFlo = Convert.ToSingle(colVal);
+                            ThisObj.Add(column, colValNumFlo);
+                            Added = true;
+                        }
+                        catch
+                        {
+                            
+                        }
 
+                        //If it has still not been added, add it as a string
+                        if (Added == false)
+                        {
+                            ThisObj.Add(column, colVal);
+                        }
+                    }
                 }
                 ToReturn.Add(ThisObj);
             }
