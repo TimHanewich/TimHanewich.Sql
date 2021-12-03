@@ -1,5 +1,5 @@
 ﻿using System;
-using TimHanewich.SqlHelper;
+using TimHanewich.Sql;
 
 namespace testing
 {

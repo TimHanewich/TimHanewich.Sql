@@ -7,7 +7,7 @@ using System.Data.Common;
 using System.Data.Sql;
 using System.Data.SqlClient;
 
-namespace TimHanewich.SqlHelper
+namespace TimHanewich.Sql
 {
     public static class SqlToolkit
     {

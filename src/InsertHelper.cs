@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace TimHanewich.SqlHelper
+namespace TimHanewich.Sql
 {
     public class InsertHelper
     {
