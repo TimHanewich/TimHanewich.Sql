@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace TimHanewich.Sql
 {
@@ -23,6 +25,29 @@ namespace TimHanewich.Sql
         public void Add(ColumnNameValuePair cnvp)
         {
             _ColumnNameValuePairs.Add(cnvp);
+        }
+
+        //Load the columns that will be inserted or updated
+        public void Load(JObject jo)
+        {
+            foreach (JProperty prop in jo.Properties())
+            {
+                if (prop.Value.Type == JTokenType.Null)
+                {
+                    Add(prop.Name, "null", false);
+                }
+                else
+                {
+                    if (prop.Value.Type == JTokenType.String)
+                    {
+                        Add(prop.Name, prop.Value.ToString(), true);
+                    }
+                    else //If it is not a string, just pass it directly (raw)
+                    {
+                        Add(prop.Name, prop.Value.ToString(), false);
+                    }
+                }
+            }
         }
 
         //Adds to the columns that will be inserted or updated (data in)
