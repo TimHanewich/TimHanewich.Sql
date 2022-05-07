@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace TimHanewich.Sql
 {
+    [Obsolete("Please use the UpstreamHelper class", false)]
     public class InsertHelper
     {
         //Private vars
