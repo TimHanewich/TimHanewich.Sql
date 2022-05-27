@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net6.0;net5.0;netstandard2.0</TargetFrameworks>
-    <Version>0.4.0</Version>
+    <Version>0.5.0</Version>
     <Authors>Tim Hanewich</Authors>
     <Company>Tim Hanewich</Company>
     <Description>Helper library for transaction with SQL (assembling commands)</Description>
