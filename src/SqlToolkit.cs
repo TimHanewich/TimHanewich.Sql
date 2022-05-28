@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.Sql;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 
 namespace TimHanewich.Sql
 {
@@ -131,6 +132,39 @@ namespace TimHanewich.Sql
             {
                 throw new Exception("A symbol does not exist for OrderDirection '" + od.ToString() + "'");
             }
+        }
+    
+        public static async Task<string> FindPrimaryKeyAsync(this SqlConnection sqlcon, string table_name)
+        {
+            string cmd = "SELECT column_name as PRIMARYKEYCOLUMN FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS TC INNER JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS KU ON TC.CONSTRAINT_TYPE = 'PRIMARY KEY' AND TC.CONSTRAINT_NAME = KU.CONSTRAINT_NAME AND KU.table_name='" + table_name +"' ORDER BY KU.TABLE_NAME,KU.ORDINAL_POSITION";
+            
+            //Is it open?
+            bool WasClosed = false;
+            if (sqlcon.State != ConnectionState.Open)
+            {
+                WasClosed = true;
+                await sqlcon.OpenAsync();
+            }
+
+            SqlCommand sqlcmd = new SqlCommand(cmd, sqlcon);
+            SqlDataReader dr = await sqlcmd.ExecuteReaderAsync();
+
+            //Get the value to return
+            string ToReturn = null;
+            if (dr.HasRows == true)
+            {
+                await dr.ReadAsync();
+                ToReturn = dr.GetString(0);
+            }
+
+
+            //If it was closed originally, close it
+            if (WasClosed)
+            {
+                sqlcon.Close();
+            }
+
+            return ToReturn;
         }
     }
 }
