@@ -155,6 +155,7 @@ namespace TimHanewich.Sql
             {
                 await dr.ReadAsync();
                 ToReturn = dr.GetString(0);
+                await dr.CloseAsync();
             }
 
 
